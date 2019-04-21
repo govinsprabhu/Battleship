@@ -1,5 +1,8 @@
+package pojo;
+
 import exceptions.InvalidInputException;
-import utills.Constants;
+import pojo.Board;
+import pojo.Position;
 
 public class Player {
     private Board board;
