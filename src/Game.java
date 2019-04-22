@@ -23,17 +23,18 @@ public class Game {
 
     public void startGame() throws InvalidInputException {
         readInput();
-        printBoard();
+        //can uncomment the below line to see the ship position in board for player 1 and player 2
+        //printBoard();
         play();
-        printBoard();
+        //printBoard();
         printResult();
     }
 
     public void printResult() {
         if (player1.areAllShipsDistroyed()) {
-            System.out.println("pojo.Player-2 won the battle");
+            System.out.println("Player-2 won the battle");
         } else if (player2.areAllShipsDistroyed()) {
-            System.out.println("pojo.Player-1 won the battle");
+            System.out.println("Player-1 won the battle");
         } else {
             System.out.println("Both players has their ships. Declaring peace");
         }
@@ -44,7 +45,7 @@ public class Game {
         while (!player1.isOver() || !player2.isOver()) {
             if (isPlayer1) {
                 if (player1.isOver()) {
-                    System.out.println("pojo.Player 1 has no more missiles left");
+                    System.out.println("Player 1 has no more missiles left");
                     isPlayer1 = !isPlayer1;
                     continue;
                 }
@@ -57,11 +58,11 @@ public class Game {
                     hitOrMiss = Constants.HIT;
                     player2.getBoard().decrement(position);
                 }
-                System.out.println(String.format("pojo.Player-1 fires a missile with target %s which %s", position, hitOrMiss));
+                System.out.println(String.format("Player-1 fires a missile with target %s which %s", position, hitOrMiss));
             } else if (!player2.isOver()) {
                 String hitOrMiss;
                 if (player2.isOver()) {
-                    System.out.println("pojo.Player 2 has no more missiles left");
+                    System.out.println("Player 2 has no more missiles left");
                     isPlayer1 = !isPlayer1;
                     continue;
                 }
@@ -73,13 +74,15 @@ public class Game {
                     hitOrMiss = Constants.HIT;
                     player1.getBoard().decrement(position);
                 }
-                System.out.println(String.format("pojo.Player-2 fires a missile with target %s which %s", position, hitOrMiss));
+                System.out.println(String.format("Player-2 fires a missile with target %s which %s", position, hitOrMiss));
             }
         }
     }
 
     public void printBoard() {
+        System.out.println("Player 1 ship positions");
         player1.getBoard().printBoard();
+        System.out.println("Player 2 ship positions");
         player2.getBoard().printBoard();
     }
 
@@ -109,7 +112,7 @@ public class Game {
         String battleShipType = scanner.nextLine().trim();
         ShipType shipType = ShipType.getShipType(battleShipType);
         if (shipType == null){
-            throw new InvalidInputException("'P' and 'Q' are the only valid input parameters");
+                throw new InvalidInputException("'P' and 'Q' are the only valid input parameters");
         }
         int strength = getStrength(shipType);
         System.out.print(String.format("\nDimension for battleship %d:", i + 1));
